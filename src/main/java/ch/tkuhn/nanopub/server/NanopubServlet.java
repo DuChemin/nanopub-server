@@ -47,6 +47,12 @@ public class NanopubServlet extends HttpServlet {
 				ResourcePage.show(r, resp, "style.css", "text/css");
 			} else if (r.getFullRequest().equals("/style/favicon.ico")) {
 				ResourcePage.show(r, resp, "favicon.ico", "image/x-icon");
+			} else if (r.getFullRequest().equals("/js/display.js")) {
+				ResourcePage.show(r, resp, "display.js", "image/x-icon");
+			} else if (r.getFullRequest().equals("/js/jquery.js")) {
+				ResourcePage.show(r, resp, "jquery.js", "image/x-icon");
+			} else if (r.getFullRequest().equals("/js/verovio.js")) {
+				ResourcePage.show(r, resp, "verovio.js", "image/x-icon");
 			} else {
 				resp.sendError(400, "Invalid GET request: " + r.getFullRequest());
 			}
