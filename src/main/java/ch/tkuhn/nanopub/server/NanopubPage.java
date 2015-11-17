@@ -60,15 +60,18 @@ public class NanopubPage extends Page {
 				return;
 			}
 		} else if (rf == null) {
-			String suppFormats = "application/trig,application/x-trig,text/x-nquads,application/trix,application/ld+json";
-			if (isIndexNanopub) {
-				suppFormats += ",text/html";
-			} else {
+			String suppFormats = "application/trig,application/x-trig,text/x-nquads,application/trix,application/ld+json,text/html";
+			if (!isIndexNanopub) {
 				suppFormats += ",text/plain";
 			}
 			String mimeType = Utils.getMimeType(getHttpReq(), suppFormats);
 			if (isIndexNanopub && "text/html".equals(mimeType)) {
 				showIndex(nanopub);
+				return;
+			}
+			else if (format == null && "text/html".equals(mimeType)) {
+				String url = getReq().getFullRequest();
+				displayJSONLD(nanopub, url);
 				return;
 			}
 			if ("text/plain".equals(mimeType)) {
@@ -198,4 +201,26 @@ public class NanopubPage extends Page {
 		println("</tr>");
 	}
 
+	private void displayJSONLD(Nanopub npm, String url) throws IOException {
+		getResp().setContentType("text/html");
+		String nphash = url.substring(1);
+		String title = "Nanopublication - Display";
+		String headerTitle = "Nanopublication - Display";
+		printHtmlHeader(headerTitle);
+		// Initialize JS tool!
+		println("<h1>Nanopublication - Display</h1>");
+		println("<h4>"+nphash+"</h4>");
+		println("<ul class='inline'>");
+		println("<li><a href='"+nphash+".trig'>trig</a></li>");
+		println("<li><a href='"+nphash+".nq'>nq</a></li>");
+		println("<li><a href='"+nphash+".xml'>xml</a></li>");
+		println("<li><a href='"+nphash+".jsonld'>jsonld</a></li>");
+		println("</ul>");
+		println("<div id='display'></div>");
+		println("<script src='js/jquery.js'></script>");
+		println("<script src='js/verovio.js'></script>");
+		println("<script src='js/display.js'></script>");
+		println("<script>displayJSONLD('"+nphash+"');</script>");
+		printHtmlFooter();
+	}
 }
