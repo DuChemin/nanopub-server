@@ -51,3 +51,46 @@ span.small {
 ul {
 	padding-left: 15px;
 }​
+
+ul.inline {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul.inline li {
+	display: inline;
+	padding-right: 1em;
+}
+
+td.field {
+	font-style: italic;
+}
+
+a.emaExpr {
+	text-decoration: underline;
+	color: black;
+	font-weight: bolder;
+}
+
+.emaExpr .uri {
+	color: #337ab7;
+}
+
+.emaExpr .mm {
+	color: #AFBC21;
+}
+
+.emaExpr .ss {
+	color: #5bc0de;
+}
+
+.emaExpr .bb {
+	color: #f0ad4e;
+}
+
+#verovioBox {
+	margin-top: 1em;
+	padding: 1em;
+	border: 1px solid Gray;
+}
